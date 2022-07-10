@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
+        <script type="module">
+            //import * as tf from '@tensorflow/tfjs';
+            //import {loadGraphModel} from '@tensorflow/tfjs-converter';
+
+            //const MODEL_URL = './anomaly_detection_js/model.json';
+            const MODEL_URL = 'foobar/model.json';
+
+            const model = await tf.loadGraphModel(MODEL_URL, {
+                fetchFunc: (url, options) => fetch(url, {mode: 'no-cors', ...options}),
+                strict: false,
+            });
+            const cat = document.getElementById('cat');
+            model.execute(tf.browser.fromPixels(cat));
+        </script>
+    </head>
+    <body>
+        <div id="cat"></div>
+    </body>
+</html>
+
